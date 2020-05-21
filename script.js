@@ -90,7 +90,7 @@ function checkForSymbol() {
   }
   return "";
 }
-// Starts password with empty string then grabs length user input and loops with regard to that length through the randomized character array to create a string with randomized numbers, letters, symbols
+// Runs through user answers, checks if they work, creates a string with randomized numbers, letters, symbols
 function generatePassword() {
   finalPassword = "";
   var chosenLength = userAnswers();
