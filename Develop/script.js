@@ -8,9 +8,10 @@
 //  Collect inputs and store
 //  Create arrays or randomizer functions for lowercase outputs, uppercase, numbers, special characters
 //  Randomly pick an alphabet, number, or special character from an array
-//  Make a loop to randomly pick letters, symbols, numbers if selected as true out of those arrays to string/array that is the input length from user in #2 above
+//  Make a loop to randomly pick letters, symbols, numbers if selected as true out of those arrays to string/array that is the  input length from user in #2 above
+//  Run a preventative check for when user does not select any criteria
 //  Concatenate those randomly picked letters, numbers, symbols
-//  Display within text area with append
+//  Display within text area
 
 // Variables
 var generateBtn = document.querySelector("#generate");
@@ -58,14 +59,12 @@ if (lengthPassword >= 8 && lengthPassword <= 128) {
       alert ("You must select atleast one criterion for the password.");
       return -1;
   };
-  
 } 
 // If false, alert user to input a number in the correct range
 else {
     alert("You must input a password length of minimum 8 characters and maximum 128 characters.")};
     userAnswers();
 };
-
 // Checks/filters out false user inputs 
 function checkForLower() {
   if (lowerCase)  {
@@ -91,7 +90,6 @@ function checkForSymbol() {
   }
   return "";
 }
-
 // Runs through user answers, checks if they work, creates a string with randomized numbers, letters, symbols
 function generatePassword() {
   finalPassword = "";
@@ -101,7 +99,6 @@ function generatePassword() {
   }
   return finalPassword;
 };
-
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
