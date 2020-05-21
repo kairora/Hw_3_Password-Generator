@@ -14,56 +14,47 @@
 
 // Variables
 var generateBtn = document.querySelector("#generate");
-// var lengthArray =  prompt ("How many characters do you want in the password?");
-// var lowerCase = confirm ("Do you want lowercase letters?");
-// var upperCase = confirm ("Do you want uppercase letters?");
-// var numberQuestion = confirm ("Do you want numbers in your password?");
-// // var specialChar = confirm ("Do you want special characters in your password?");
-// var userArray = [lengthArray, lowerCase, upperCase, numberQuestion, specialChar];
+var lengthPassword =  prompt ("How many characters do you want in the password?");
+var lowerCase = confirm ("Do you want lowercase letters?");
+var upperCase = confirm ("Do you want uppercase letters?");
+var numberQuestion = confirm ("Do you want numbers in your password?");
+var specialChar = confirm ("Do you want special characters in your password?");
+var userArray = [lengthArray, lowerCase, upperCase, numberQuestion, specialChar];
 
+// Using an array of predefined symbols since no specification of which symbols are appropriate in passwords
+symbolArray = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', ';', ',', '.', '[', ']'];
+// Creates an array of true user inputs that returned random characters, numbers, symbols
+var checkedArray = [checkForLower, checkForUpper, checkForNum, checkForSymbol]
+// Creates the final passwords initial, empty string
+finalPassword = '';
 
 // Functions
-// Randomizing function for lowercase characters pulled from character code
-
+// Randomizing functions for lowercase, uppercase, numbers, and special characters pulled from character code
 function findCharCode() {
   return Math.floor(Math.random() * 26);
 }
-function findRandomLowCase() {
+function genRandomLowCase() {
   return String.fromCharCode(findCharCode() + 97);
 }
-function findRandomUpperCase() {
+function genRandomUpperCase() {
   return String.fromCharCode(findCharCode() + 65);
 }
-function findRandomNum() {
+function genRandomNum() {
   return Math.floor(Math.random() * 9);
 }
-// Using an array of predefined symbols since no specification of which symbols are appropriate in passwords
-symbolArray = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', ';', ',', '.', '[', ']'];
-
-
-function findRandomSymbol() {
+function genRandomSymbol() {
   return symbolArray[Math.floor(Math.random() * symbolArray.length)];
 }
-
-
-
-
-
-
-
-
-
-
-
 function userAnswers() {
   // First Alert: Ask user for number of characters
-  var lengthPassword =  prompt ("How many characters do you want in the password?");
   // Check if the number is between 8 and 128, if true keep prompting for other types of characters, numbers, and symbols in password. If false, alert user to input a number in the correct range
 if (lengthPassword >= 8 && lengthPassword <= 128) {
-  var lowerCase = confirm ("Do you want lowercase letters?");
-  var upperCase = confirm ("Do you want uppercase letters?");
-  var numberQuestion = confirm ("Do you want numbers in your password?");
-  var specialChar = confirm ("Do you want special characters in your password?");
+  lengthPassword;
+  lowerCase;
+  upperCase;
+  numberQuestion;
+  specialChar;
+  return lengthPassword;
 } 
 // If false, alert user to input a number in the correct range
 else {
@@ -71,11 +62,35 @@ else {
     userAnswers();
 };
 
-
+// Checks/filters out false user inputs 
+function checkForLower() {
+  if (lowerCase)  {
+    genRandomLowCase();
+  }
+}
+function checkForUpper() {
+  if (upperCase)  {
+    genRandomUpperCase();
+  }
+}
+function checkForNum() {
+  if (numberQuestion)  {
+    genRandomNum();
+  }
+}
+function checkForSymbol() {
+  if (specialChar)  {
+    genRandomSymbol();
+  }
+}
 function generatePassword() {
   userAnswers();
+  var chosenLength = userAnswers();
+  while (finalPassword.length < chosenLength) {
+    finalPassword.concat('', checkedArray[Math.floor(Math.random() * checkedArray.length)]());
+  }
+  return finalPassword;
 };
-
 
 // Write password to the #password input
 function writePassword() {
@@ -85,13 +100,6 @@ function writePassword() {
   passwordText.value = password;
 
 }
-
-
-
-
-
-
-
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword)
 
