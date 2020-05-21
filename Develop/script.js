@@ -14,12 +14,10 @@
 
 // Variables
 var generateBtn = document.querySelector("#generate");
-var lengthPassword =  prompt ("How many characters do you want in the password?");
-var lowerCase = confirm ("Do you want lowercase letters?");
-var upperCase = confirm ("Do you want uppercase letters?");
-var numberQuestion = confirm ("Do you want numbers in your password?");
-var specialChar = confirm ("Do you want special characters in your password?");
-var userArray = [lengthArray, lowerCase, upperCase, numberQuestion, specialChar];
+lowerCase = false;
+upperCase = false;
+numberQuestion = false;
+specialChar = false;
 
 // Using an array of predefined symbols since no specification of which symbols are appropriate in passwords
 symbolArray = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', ';', ',', '.', '[', ']'];
@@ -47,14 +45,20 @@ function genRandomSymbol() {
 }
 function userAnswers() {
   // First Alert: Ask user for number of characters
+  var lengthPassword =  prompt ("How many characters do you want in the password?");
   // Check if the number is between 8 and 128, if true keep prompting for other types of characters, numbers, and symbols in password. If false, alert user to input a number in the correct range
 if (lengthPassword >= 8 && lengthPassword <= 128) {
-  lengthPassword;
-  lowerCase;
-  upperCase;
-  numberQuestion;
-  specialChar;
-  return lengthPassword;
+  lowerCase = confirm ("Do you want lowercase letters?");
+  upperCase = confirm ("Do you want uppercase letters?");
+  numberQuestion = confirm ("Do you want numbers in your password?");
+  specialChar = confirm ("Do you want special characters in your password?");
+  if (lowerCase || upperCase || numberQuestion || specialChar) {
+    return lengthPassword;
+  } else {
+      alert ("You must select atleast one criterion for the password.");
+      return -1;
+  };
+  
 } 
 // If false, alert user to input a number in the correct range
 else {
@@ -65,29 +69,35 @@ else {
 // Checks/filters out false user inputs 
 function checkForLower() {
   if (lowerCase)  {
-    genRandomLowCase();
-  }
+    return genRandomLowCase();
+  } 
+  return "";
 }
 function checkForUpper() {
   if (upperCase)  {
-    genRandomUpperCase();
+    return genRandomUpperCase();
   }
+  return "";
 }
 function checkForNum() {
   if (numberQuestion)  {
-    genRandomNum();
+    return genRandomNum();
   }
+  return "";
 }
 function checkForSymbol() {
   if (specialChar)  {
-    genRandomSymbol();
+    return genRandomSymbol();
   }
+  return "";
 }
+
+// Runs through user answers, checks if they work, creates a string with randomized numbers, letters, symbols
 function generatePassword() {
-  userAnswers();
+  finalPassword = "";
   var chosenLength = userAnswers();
   while (finalPassword.length < chosenLength) {
-    finalPassword.concat('', checkedArray[Math.floor(Math.random() * checkedArray.length)]());
+    finalPassword = finalPassword.concat('', checkedArray[Math.floor(Math.random() * checkedArray.length)]());
   }
   return finalPassword;
 };
@@ -98,8 +108,8 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword)
+
 
