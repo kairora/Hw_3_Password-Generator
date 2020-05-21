@@ -6,8 +6,8 @@
 //     4. confirm alert numbers
 //     5. confirm alert special characters
 //  Collect inputs and store
-//  Create arrays for lowercase outputs, uppercase, numbers, special characters
-//  Randomly pick an alphabet, number, or special character from the array
+//  Create arrays or randomizer functions for lowercase outputs, uppercase, numbers, special characters
+//  Randomly pick an alphabet, number, or special character from an array
 //  Make a loop to randomly pick letters, symbols, numbers if selected as true out of those arrays to string/array that is the input length from user in #2 above
 //  Concatenate those randomly picked letters, numbers, symbols
 //  Display within text area with append
@@ -23,22 +23,31 @@ var generateBtn = document.querySelector("#generate");
 
 
 // Functions
-// array for lowercase characters
+// Randomizing function for lowercase characters pulled from character code
 
 function findCharCode() {
-  Math.floor(Math.random() * 26);
-};
+  return Math.floor(Math.random() * 26);
+}
 function findRandomLowCase() {
-  String.fromCharCode(findCharCode() + 97);
-};
+  return String.fromCharCode(findCharCode() + 97);
+}
 function findRandomUpperCase() {
-  String.fromCharCode(findCharCode() + 65);
-};
+  return String.fromCharCode(findCharCode() + 65);
+}
 function findRandomNum() {
-  Math.floor(Math.random() * 9);
-};
+  return Math.floor(Math.random() * 9);
+}
 // Using an array of predefined symbols since no specification of which symbols are appropriate in passwords
 symbolArray = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', ';', ',', '.', '[', ']'];
+
+
+function findRandomSymbol() {
+  return symbolArray[Math.floor(Math.random() * symbolArray.length)];
+}
+
+
+
+
 
 
 
@@ -48,9 +57,9 @@ symbolArray = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', ';', ',', '.', 
 
 function userAnswers() {
   // First Alert: Ask user for number of characters
-  var lengthArray =  prompt ("How many characters do you want in the password?");
+  var lengthPassword =  prompt ("How many characters do you want in the password?");
   // Check if the number is between 8 and 128, if true keep prompting for other types of characters, numbers, and symbols in password. If false, alert user to input a number in the correct range
-if (lengthArray >= 8 && lengthArray <= 128) {
+if (lengthPassword >= 8 && lengthPassword <= 128) {
   var lowerCase = confirm ("Do you want lowercase letters?");
   var upperCase = confirm ("Do you want uppercase letters?");
   var numberQuestion = confirm ("Do you want numbers in your password?");
