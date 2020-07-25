@@ -12,19 +12,19 @@ This app utilizes Javascript facilitate a browser-run application that generates
 
 2. Then prompt the user to answer whether they want lowercase characters.
 
-![Password Lowercase Criteria Prompt Screenshot](./assets/Lowcase-Check.png)
+![Password Lowercase Criteria Prompt Screenshot](./assets/lowcase-check.png)
 
 3. Then prompt the user to answer whether they want uppercase characters.
 
-![Password uppercase Criteria Prompt Screenshot](./assets/Uppcase-Check.png)
+![Password Uppercase Criteria Prompt Screenshot](./assets/uppcase-check.png)
 
 4. Next, users are prompted for whether they prefer numbers in their passwords.
 
-![Password Number Criteria Prompt Screenshot](./assets/Num-Check.png)
+![Password Number Criteria Prompt Screenshot](./assets/num-check.png)
 
 5. Finally, the user is prompted for whether they prefer to have special characters in their password.
 
-![Password Symbol Criteria Prompt Screenshot](./assets/Special.png)
+![Password Symbol Criteria Prompt Screenshot](./assets/special.png)
 
 
 The program would then check that the user has selected atleast one of the criteria and run conditions that would result in a password generated based on the inputs the user has made. 
